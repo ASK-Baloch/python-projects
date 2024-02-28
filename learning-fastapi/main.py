@@ -11,7 +11,7 @@ def index():
 
 
 @app.get('/blog/{id}')
-def abc(id):
+def abc(id:int):
     return {'Blog No': id}
 
 
@@ -19,3 +19,4 @@ def abc(id):
 def comments(id):
     return {'data': f'blog comments: {id}'}
     # return {'data': {'1', '2'}}
+  

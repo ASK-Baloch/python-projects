@@ -39,3 +39,4 @@ class Blog(SQLModel):
 @app.post('/blog')
 def create_blog(blog:Blog):
     return {'data': f'Blog is created successfully with title as {blog.title}'}
+

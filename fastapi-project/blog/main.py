@@ -1,17 +1,17 @@
 from fastapi import FastAPI
 from sqlmodel import SQLModel, Field, create_engine, Session, select
-# from . import schemas
-from . import models
+from .schemas import Blog
+from .models import Base
 from database import engine
 
 app = FastAPI()
 
-models.Blog.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
-class Blog(SQLModel):
-    title: str
-    body: str
-    # published: bool
+# class Blog(SQLModel):
+#     title: str
+#     body: str
+#     # published: bool
 
 
 @app.post('/blog')

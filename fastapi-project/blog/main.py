@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from sqlmodel import SQLModel, Field, create_engine, Session, select, Column
 from dotenv import load_dotenv, find_dotenv
 from os import getenv
+from schemas import Blog1
 
 # Load environment variables
 load_dotenv(find_dotenv())
@@ -13,6 +14,7 @@ postgres_url: str = getenv("POSTGRESQL_URL")
 engine = create_engine(postgres_url)
 
 # Define the base model
+
 
 
 class Base(SQLModel, table=True):
@@ -35,5 +37,6 @@ app = FastAPI()
 
 
 @app.post('/blog')
-def create(req: Blog):
+def create(req: Blog1):
+    print("Blog Title" , Blog1.title)
     return req

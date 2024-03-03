@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlmodel import Session, select
 from models import Blog
 from database import engine
@@ -30,3 +30,11 @@ def create(req: Blog, db: Session = Depends(get_deb)):
 def get_all(db: Annotated[Session, Depends(get_deb)]):
     blogs = db.exec(select(Blog)).all()
     return blogs
+
+
+@app.get('/blog/{id}')
+def show(id, db: Annotated[Session, Depends(get_deb)]):
+    blog = db.get(Blog, id)
+    if not blog:
+        raise HTTPException(status_code=404, detail="blog not found")
+    return blog

@@ -31,7 +31,6 @@ def get_all(db: Annotated[Session, Depends(get_deb)]):
     blogs = db.exec(select(Blog)).all()
     return blogs
 
-
 @app.get('/blog/{id}', status_code=status.HTTP_200_OK)
 def show(id, db: Annotated[Session, Depends(get_deb)]):
     blog = db.get(Blog, id)
@@ -39,3 +38,13 @@ def show(id, db: Annotated[Session, Depends(get_deb)]):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"blog with {id} not found")
     return blog
+
+@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)
+def destroy(id, db: Annotated[Session, Depends(get_deb)]):
+    blog = db.get(Blog, id)
+    if not blog:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"blog with {id} not found")
+    db.delete(blog)
+    db.commit()
+    return f'Blog with id:{id} deleted'

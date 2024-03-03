@@ -26,7 +26,7 @@ def create(req: Blog, db: Session = Depends(get_deb)):
     return new_blog
 
 
-@app.get("/blog" status_code=status.HTTP_200_OK)
+@app.get("/blog",status_code=status.HTTP_200_OK)
 def get_all(db: Annotated[Session, Depends(get_deb)]):
     blogs = db.exec(select(Blog)).all()
     return blogs

@@ -16,11 +16,10 @@ engine = create_engine(postgres_url)
 # Define the base model
 
 
-
 class Base(SQLModel, table=True):
-    id:int = Field(int, primary_key=True, index=True)
-    title:str = Field(str)
-    body:str = Field(str)
+    id: int = Field(int, primary_key=True, index=True)
+    title: str = Field(str)
+    body: str = Field(str)
 
 # Define the Blog model
 
@@ -38,5 +37,5 @@ app = FastAPI()
 
 @app.post('/blog')
 def create(req: Blog1):
-    print("Blog Title" , Blog1.title)
+    print("Blog Title", Blog1.title)
     return req

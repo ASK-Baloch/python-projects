@@ -39,6 +39,19 @@ def show(id, db: Annotated[Session, Depends(get_deb)]):
             status_code=status.HTTP_404_NOT_FOUND, detail=f"blog with {id} not found")
     return blog
 
+@app.patch('/blog/{id}', status_code=status.HTTP_202_ACCEPTED)
+def updating(id, req: Blog, db: Annotated[Session, Depends(get_deb)]):
+    blog = db.get(Blog, id)
+    if not blog:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"blog with {id} not found")
+    blog.title = req.title
+    blog.body = req.body
+    db.commit()
+    db.refresh(blog)
+    return blog
+
+
 @app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)
 def destroy(id, db: Annotated[Session, Depends(get_deb)]):
     blog = db.get(Blog, id)

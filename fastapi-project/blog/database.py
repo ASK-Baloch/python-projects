@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field, create_engine
+from sqlmodel import create_engine
 from dotenv import load_dotenv, find_dotenv
 from os import getenv
 
@@ -8,4 +8,4 @@ _: bool = load_dotenv(find_dotenv())
 
 
 postgres_url: str = getenv("POSTGRESQL_URL")
-engine = create_engine(postgres_url )
+engine = create_engine(postgres_url)

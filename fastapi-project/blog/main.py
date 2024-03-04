@@ -41,24 +41,28 @@ def show(id, db: Annotated[Session, Depends(get_deb)]):
     return blog
 
 
-@app.patch('/blog/{id}', status_code=status.HTTP_202_ACCEPTED)
+@app.patch("/blog/{id}", status_code=status.HTTP_202_ACCEPTED)
 def updating(id: int, req: Blog, db: Session = Depends(get_deb)):
-    blog = db.get(Blog, id)
-    if not blog:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=f"blog with id {
-                id} not found"
-        )
+    with db.begin() as session:
+        try:
+            blog = session.get(Blog, id)
+            if not blog:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"Blog with id {id} not found",
+                )
 
-    if req.title is not None and req.title != blog.title:
-        blog.title = req.title
+            # Update model attributes directly
+            blog.title = req.title
+            blog.body = req.body
 
-    if req.body is not None and req.body != blog.body:
-        blog.body = req.body
+            session.add(blog)  # Mark model for update
+            session.commit()  # Commit changes
+            return blog
+        except Exception as e:
+            session.rollback()  # Rollback if any error occurs
+            raise HTTPException(status_code=500, detail=f"Error updating blog: {str(e)}")
 
-    db.commit()
-    db.refresh(blog)
-    return blog
 
 
 @app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)

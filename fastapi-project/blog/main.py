@@ -50,16 +50,19 @@ def updating(id: int, req: Blog, db: Session = Depends(get_deb)):
             detail=f"Blog with id {id} not found",
         )
 
-
     # Update only changed fields
     # blog.title = req.title if req.title is not None else blog.title
     # blog.body = req.body if req.body is not None else blog.body
     # Update only changed fields
     if req.title is not None:
         blog.title = req.title
+    else:
+        blog.title = blog.title
 
     if req.body is not None:
         blog.body = req.body
+    else:
+        blog.body = blog.body
 
     db.add(blog)
     db.commit()

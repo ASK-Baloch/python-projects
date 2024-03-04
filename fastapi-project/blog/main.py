@@ -49,20 +49,11 @@ def updating(id: int, req: Blog, db: Session = Depends(get_deb)):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Blog with id {id} not found",
         )
-
-    # Update only changed fields
-    # blog.title = req.title if req.title is not None else blog.title
-    # blog.body = req.body if req.body is not None else blog.body
-    # Update only changed fields
-    if req.title is not None:
+    if req.title is not None and req.title != blog.title:
         blog.title = req.title
-    else:
-        blog.title = blog.title
 
-    if req.body is not None:
+    if req.body is not None and req.body != blog.body:
         blog.body = req.body
-    else:
-        blog.body = blog.body
 
     db.add(blog)
     db.commit()

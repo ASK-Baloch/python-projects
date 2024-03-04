@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlmodel import Session, select
-from models import Blog
+from models import Blog, showBlog
 from database import engine
 from typing import Annotated
 
@@ -32,7 +32,7 @@ def create(req: Blog, db: Session = Depends(get_deb)):
     return new_blog
 
 
-@app.get('/blog/{id}', status_code=status.HTTP_200_OK)
+@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=list[showBlog])
 def show(id, db: Annotated[Session, Depends(get_deb)]):
     blog = db.get(Blog, id)
     if not blog:

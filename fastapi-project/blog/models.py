@@ -14,3 +14,7 @@ class Blog(SQLModel, table=True):
     title: str
     body: str
     # published: bool
+
+
+class showBlog(SQLModel):
+    title:str

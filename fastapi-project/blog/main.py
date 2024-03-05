@@ -3,7 +3,7 @@ from sqlmodel import Session, select
 from models import Blog, showBlog, User
 from database import engine
 from typing import Annotated
-from passlib.context import CryptContext
+from hashing import Hash
 
 
 # Create the FastAPI application
@@ -74,14 +74,11 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 #                            NOW CREATING USER ROUTES...
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-
 @app.post('/user')
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
-    hashed_password = pwd_context.hash(request.password)
+    
     new_user = User(name=request.name, email=request.email,
-                    password=hashed_password)
+                    password=Hash.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

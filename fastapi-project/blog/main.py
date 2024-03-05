@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlmodel import Session, select
-from models import Blog, showBlog
+from models import Blog, showBlog, User
 from database import engine
 from typing import Annotated
 
@@ -71,7 +71,13 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
     return f'Blog with id:{id} deleted'
 
 
-
 #                            NOW CREATING USER ROUTES...
 
-
+@app.post('/user')
+def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
+    new_user = User(name=request.name, email=request.email,
+                    password=request.password)
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user

@@ -17,4 +17,17 @@ class Blog(SQLModel, table=True):
 
 
 class showBlog(SQLModel):
-    title:str
+    title: str
+
+
+# class User(SQLModel):
+#     name: str
+#     email: str
+#     password: str
+
+
+class User(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(str)
+    email: str = Field(str)
+    password: str = Field(str)

@@ -69,3 +69,9 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
     db.delete(blog)
     db.commit()
     return f'Blog with id:{id} deleted'
+
+
+
+#                            NOW CREATING USER ROUTES...
+
+

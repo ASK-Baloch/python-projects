@@ -74,15 +74,6 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 #                            NOW CREATING USER ROUTES...
 
-# @app.post('/user', response_model=list[ShowUser], status_code=status.HTTP_201_CREATED)
-# def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
-
-#     new_user = User(name=request.name, email=request.email,
-#                     password=Hash.bcrypt(request.password))
-#     db.add(new_user)
-#     db.commit()
-#     db.refresh(new_user)
-#     return new_user
 @app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED)
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
@@ -94,3 +85,12 @@ def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
     # Ensure response is a dictionary
     return new_user.dict()  # Convert model instance to a dictionary
+
+
+@app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK)
+def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
+    user = db.get(User, id)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} not found")
+    return user

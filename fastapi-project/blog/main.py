@@ -83,8 +83,7 @@ def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
     db.commit()
     db.refresh(new_user)
 
-    # Ensure response is a dictionary
-    return new_user.dict()  # Convert model instance to a dictionary
+    return new_user
 
 
 @app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK)

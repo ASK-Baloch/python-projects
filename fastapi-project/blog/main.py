@@ -18,13 +18,13 @@ def get_deb():
         yield session
 
 
-@app.get("/blog", status_code=status.HTTP_200_OK)
+@app.get("/blog", status_code=status.HTTP_200_OK, tags=["blogs"])
 def get_all(db: Annotated[Session, Depends(get_deb)]):
     blogs = db.exec(select(Blog)).all()
     return blogs
 
 
-@app.post('/blog', status_code=status.HTTP_201_CREATED)
+@app.post('/blog', status_code=status.HTTP_201_CREATED, tags=["blogs"])
 def create(req: Blog, db: Session = Depends(get_deb)):
     new_blog = Blog(title=req.title, body=req.body)
     db.add(new_blog)
@@ -33,7 +33,7 @@ def create(req: Blog, db: Session = Depends(get_deb)):
     return new_blog
 
 
-@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=list[showBlog])
+@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=list[showBlog], tags=["blogs"])
 def show(id, db: Annotated[Session, Depends(get_deb)]):
     blog = db.get(Blog, id)
     if not blog:
@@ -42,7 +42,7 @@ def show(id, db: Annotated[Session, Depends(get_deb)]):
     return blog
 
 
-@app.patch("/blog/{id}", status_code=status.HTTP_202_ACCEPTED)
+@app.patch("/blog/{id}", status_code=status.HTTP_202_ACCEPTED, tags=["blogs"])
 def updating(id: int, req: Blog, db: Session = Depends(get_deb)):
     blog = db.get(Blog, id)
     if not blog:
@@ -61,7 +61,7 @@ def updating(id: int, req: Blog, db: Session = Depends(get_deb)):
     return blog
 
 
-@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=["blogs"])
 def destroy(id, db: Annotated[Session, Depends(get_deb)]):
     blog = db.get(Blog, id)
     if not blog:
@@ -74,7 +74,7 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 #                            NOW CREATING USER ROUTES...
 
-@app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED)
+@app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED,tags=["users"])
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
     new_user = User(name=request.name, email=request.email,
@@ -86,7 +86,7 @@ def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
     return new_user
 
 
-@app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK)
+@app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK,tags=["users"])
 def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
     user = db.get(User, id)
     if not user:

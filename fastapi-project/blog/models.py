@@ -32,6 +32,7 @@ class User(SQLModel, table=True):
     email: str = Field(str)
     password: str = Field(str)
 
+
 class ShowUser(SQLModel):
-    name:str
-    email:str
+    name: str
+    email: str

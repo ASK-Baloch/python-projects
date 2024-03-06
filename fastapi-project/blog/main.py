@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlmodel import Session, select
-from models import Blog, showBlog, User
+from models import Blog, showBlog, User , ShowUser
 from database import engine
 from typing import Annotated
 from hashing import Hash
@@ -74,7 +74,7 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 #                            NOW CREATING USER ROUTES...
 
-@app.post('/user')
+@app.post('/user',response_model=ShowUser,status_code=status.HTTP_201_CREATED)
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
     
     new_user = User(name=request.name, email=request.email,

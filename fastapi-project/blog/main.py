@@ -74,7 +74,7 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 #                            NOW CREATING USER ROUTES...
 
-@app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED,tags=["users"])
+@app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED, tags=["users"])
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
     new_user = User(name=request.name, email=request.email,
@@ -86,7 +86,7 @@ def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
     return new_user
 
 
-@app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK,tags=["users"])
+@app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK, tags=["users"])
 def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
     user = db.get(User, id)
     if not user:
@@ -94,3 +94,8 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
             status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} not found")
     return user
 
+
+@app.get('/user', response_model=list[ShowUser], status_code=status.HTTP_200_OK, tags=["users"])
+def get_all_users(db: Annotated[Session, Depends(get_deb)]):
+    users = db.exec(select(User)).all()
+    return users

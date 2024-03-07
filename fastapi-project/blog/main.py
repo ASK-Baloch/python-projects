@@ -93,3 +93,4 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} not found")
     return user
+

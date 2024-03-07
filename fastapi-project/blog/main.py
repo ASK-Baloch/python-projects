@@ -99,3 +99,4 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
 def get_all_users(db: Annotated[Session, Depends(get_deb)]):
     users = db.exec(select(User)).all()
     return users
+

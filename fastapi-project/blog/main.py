@@ -73,7 +73,7 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 
 #                            NOW CREATING USER ROUTES...
-
+# this route is for creating a user...
 @app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED, tags=["users"])
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
@@ -99,4 +99,3 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
 def get_all_users(db: Annotated[Session, Depends(get_deb)]):
     users = db.exec(select(User)).all()
     return users
-

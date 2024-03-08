@@ -1,29 +1,5 @@
-from sqlmodel import SQLModel, Field
-
-
-# class Blog1(SQLModel, table=True):
-#     id: int | None = Field(default=None, primary_key=True)
-#     title: str = Field(str)
-#     body: str = Field(str)
-
-# from schemas import Base
-
-
-class Blog(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    title: str
-    body: str
-    # published: bool
-
-
-class showBlog(SQLModel):
-    title: str
-
-
-# class User(SQLModel):
-#     name: str
-#     email: str
-#     password: str
+from sqlmodel import SQLModel, Field, Relationship
+from typing import List , Optional
 
 
 class User(SQLModel, table=True):
@@ -31,8 +7,22 @@ class User(SQLModel, table=True):
     name: str = Field(str)
     email: str = Field(str)
     password: str = Field(str)
+    user_id:int = Field(foreign_key="user.id")
+    creator:List["Blog"] = Relationship(back_populates="Blog")
 
 
 class ShowUser(SQLModel):
     name: str
     email: str
+
+
+class Blog(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    title: str
+    body: str
+    # published: bool
+    blogs:Optional[User] = Relationship(back_populates="creator")
+
+
+class showBlog(SQLModel):
+    title: str

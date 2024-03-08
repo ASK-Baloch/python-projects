@@ -73,7 +73,7 @@ def destroy(id, db: Annotated[Session, Depends(get_deb)]):
 
 
 #                            NOW CREATING USER ROUTES...
-# this route is for creating a user...
+#   this route is for creating a user...
 @app.post('/user', response_model=ShowUser, status_code=status.HTTP_201_CREATED, tags=["users"])
 def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
@@ -85,6 +85,8 @@ def create_user(request: User, db: Annotated[Session, Depends(get_deb)]):
 
     return new_user
 
+#   this route is for getting a single user...
+
 
 @app.get('/user/{id}', response_model=ShowUser, status_code=status.HTTP_200_OK, tags=["users"])
 def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
@@ -93,6 +95,8 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} not found")
     return user
+
+# this route is for getting all the users...
 
 
 @app.get('/user', response_model=list[ShowUser], status_code=status.HTTP_200_OK, tags=["users"])

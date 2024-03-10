@@ -1,6 +1,5 @@
 from sqlmodel import SQLModel, Field, Relationship
 from typing import List, Optional
-from models1 import Blog
 
 
 # # class User(SQLModel, table=True):
@@ -32,13 +31,6 @@ from models1 import Blog
 # #     body: str
 # #     # published: bool
 # #     blogs: Optional[User] = Relationship(back_populates="creator")
-# class Blog(SQLModel, table=True):
-#     id: int | None = Field(default=None, primary_key=True)
-#     title: str
-#     body: str
-#     creator_id: int = Field(default=None, foreign_key="user.id")
-#     # Relationship back-reference
-#     creator: User = Relationship(User, back_populates="blogs")
 
 
 class ShowBlog(SQLModel):
@@ -55,13 +47,13 @@ class User(SQLModel, table=True):
     email: str = Field(max_length=255, unique=True)  # Ensure unique emails
     password: str = Field(..., nullable=False)  # Hide password on retrieval
     # Many-to-Many relationship
-    blogs= Relationship(Blog, back_populates="creator")
+    blogs = Relationship("Blog", back_populates="creator")
 
 
+class Blog(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    title: str
+    body: str
+    creator_id: int = Field(default=None, foreign_key="user.id")
+    creator: User = Relationship(User, back_populates="blogs")
 
-# class ShowBlog(SQLModel):
-#     title: str = Field(...)
-
-# class ShowUser(SQLModel):
-#     name: str = Field(...)
-#     email: str = Field(...)  # Include email in the response if needed

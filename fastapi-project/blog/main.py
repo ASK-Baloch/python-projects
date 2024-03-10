@@ -103,3 +103,11 @@ def get_user(id: str, db: Annotated[Session, Depends(get_deb)]):
 def get_all_users(db: Annotated[Session, Depends(get_deb)]):
     users = db.exec(select(User)).all()
     return users
+
+
+# def main():
+#     create_db_and_tables()
+
+
+# if __name__ == "__main__":
+#     main()

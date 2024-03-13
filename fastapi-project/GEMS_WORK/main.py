@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 import uvicorn
+from database import engine
+from sqlmodel import create_engine,SQLModel
 
 app = FastAPI()
+
+def create_db_and_tables():
+ SQLModel.metadata.create_all(engine)
 
 
 

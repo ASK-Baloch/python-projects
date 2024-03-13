@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./GEMS_WORK/models"
+    ]
+}

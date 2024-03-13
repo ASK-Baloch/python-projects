@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 import uvicorn
 from database import engine
-from sqlmodel import create_engine, SQLModel
+from sqlmodel import SQLModel
+from models.gem_model import *
 
 app = FastAPI()
 
 
 def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
+    Gem.metadata.create_all(engine)
 
 
 @app.get('/')

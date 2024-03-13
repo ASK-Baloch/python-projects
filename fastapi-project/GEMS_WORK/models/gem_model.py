@@ -34,4 +34,6 @@ class Gem(SQLModel, table=True):
     id: int = Field(primary_key=True, index=True)
     price: float
     available: bool = True
-    gem_type = GemTypes 
+    gem_type = GemTypes = GemTypes.DIAMOND
+
+    gem_properties: Optional[GemProperties] = None

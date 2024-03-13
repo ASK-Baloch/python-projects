@@ -36,4 +36,4 @@ class Gem(SQLModel, table=True):
     available: bool = True
     gem_type = GemTypes = GemTypes.DIAMOND
 
-    gem_properties: Optional[GemProperties] = None
+    gem_properties: Optional[GemProperties] = Field(default=None, foreign_key="gemproperties.id")

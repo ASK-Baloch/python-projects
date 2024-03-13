@@ -1,7 +1,12 @@
 from sqlmodel import SQLModel, Field
 from enum import Enum
+from typing import Optional
 
-class GeoClarity(Enum)
+class GeoClarity(Enum):
+    FL = "FL"
+    VS = 'VS'
+    WS = 'WS'
+    SI = 'SI'
 
 class Gem(SQLModel, table=True):
     id: int = Field(primary_key=True,index=True)
@@ -9,4 +14,4 @@ class Gem(SQLModel, table=True):
     name: str
     description: str
     price: float
-    clarity:GeoClarity
+    clarity:Optional[GeoClarity]

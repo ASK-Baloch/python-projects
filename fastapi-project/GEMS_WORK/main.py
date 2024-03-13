@@ -4,8 +4,6 @@ import uvicorn
 app = FastAPI()
 
 
-engine = create_engine('sqlite:///./db.sqlite3', connect_args={'check_same_thread': False})
-
 
 @app.get('/')
 def hello():

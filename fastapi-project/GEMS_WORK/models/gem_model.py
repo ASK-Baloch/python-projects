@@ -3,11 +3,16 @@ from enum import Enum
 from typing import Optional
 
 
+class GemTypes(Enum):
+    DIAMOND = "DIAMOND"
+    RUBY = 'RUBY'
+    EMERALD = 'EMERALD'
+
 class GeoClarity(Enum):
-    FL = "FL"
-    VS = 'VS'
-    WS = 'WS'
-    SI = 'SI'
+    SI = 1
+    VS = 2 
+    WS = 3 
+    FL = 4
 
 
 class GemColor(Enum):
@@ -18,12 +23,15 @@ class GemColor(Enum):
     H = "H"
     I = "I"
 
+class GemProperties(SQLModel, table=True):
+    id: int = Field(primary_key=True, index=True)
+    size:float =1
+    clarity: Optional[GeoClarity] = None
+    color: Optional[GemColor] = None
+
 
 class Gem(SQLModel, table=True):
     id: int = Field(primary_key=True, index=True)
-    size: float = 1
-    name: str
-    description: str
     price: float
-    clarity: Optional[GeoClarity] = None
-    color: Optional[GemColor] = None
+    available: bool = True
+    gem_type = GemTypes 

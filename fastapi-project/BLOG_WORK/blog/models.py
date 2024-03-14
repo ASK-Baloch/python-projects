@@ -20,9 +20,9 @@ from typing import List, Optional
 #     blogs: Relationship(Blog, back_populates="creator") # type: ignore
 
 
-# class ShowUser(SQLModel):
-#     name: str
-#     email: str
+class ShowUser(SQLModel):
+    name: str
+    email: str
 
 
 # # class Blog(SQLModel, table=True):
@@ -33,8 +33,8 @@ from typing import List, Optional
 # #     blogs: Optional[User] = Relationship(back_populates="creator")
 
 
-class ShowBlog(SQLModel):
-    title: str = Field(...)
+# class ShowBlog(SQLModel):
+#     title: str = Field(...)
 
 
 class showBlog(SQLModel):
@@ -47,7 +47,7 @@ class User(SQLModel, table=True):
     email: str = Field(max_length=255, unique=True)  # Ensure unique emails
     password: str = Field(..., nullable=False)  # Hide password on retrieval
     # Many-to-Many relationship
-    blogs = Relationship("Blog", back_populates="creator")
+    # blogs = Relationship("Blog", back_populates="creator")
 
 
 class Blog(SQLModel, table=True):
@@ -55,5 +55,5 @@ class Blog(SQLModel, table=True):
     title: str
     body: str
     creator_id: int = Field(default=None, foreign_key="user.id")
-    creator: User = Relationship(User, back_populates="blogs")
+    # creator: User = Relationship(User, back_populates="blogs")
 

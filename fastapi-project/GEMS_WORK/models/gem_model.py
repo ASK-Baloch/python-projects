@@ -2,20 +2,20 @@ from sqlmodel import SQLModel, Field ,Relationship
 from enum import Enum, IntEnum
 from typing import Optional
 
-
+# this class contains GemTYPES 
 class GemTypes(str, Enum):
     DIAMOND = "DIAMOND"
     RUBY = 'RUBY'
     EMERALD = 'EMERALD'
 
-
+# this class contains GemClarity
 class GeoClarity(IntEnum):
     SI = 1
     VS = 2
     WS = 3
     FL = 4
 
-
+# this class contains GemColor
 class GemColor(str, Enum):
     D = "D"
     E = "E"
@@ -24,14 +24,14 @@ class GemColor(str, Enum):
     H = "H"
     I = "I"
 
-
+# this class contains GemProperties and will have the Table name as GemProperties
 class GemProperties(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True, index=True)
     size: float = 1
     clarity: Optional[GeoClarity] = None
     color: Optional[GemColor] = None
 
-
+# this is the main class of  Gem . and will have the Table name as Gem
 class Gem(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True, index=True)
     price: float

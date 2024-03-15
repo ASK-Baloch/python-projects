@@ -16,7 +16,7 @@ def create_gem_props():
 
 
 # funtion that will be used to create a gem
-def create_gem():
+def create_gem(gem_p):
     gem = Gem(price=1000,gem_properties_id=gem_p)
     return gem
 

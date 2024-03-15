@@ -1,7 +1,11 @@
 from models.gem_model import Gem, GemProperties
 import random
 import string
+
+# creating a list of colors
 color_grades=string.ascii_uppercase[3:9]
+
+
 # creating gem props to further use like an interface
 def create_gem_props():
     size = random.randInt(3, 70)/10
@@ -9,10 +13,13 @@ def create_gem_props():
     clarity = random.randint(1,4)
     gem_p=GemProperties(size=size,color=color,clarity=clarity)
     return gem_p
+
+
 # funtion that will be used to create a gem
 def create_gem():
     gem = Gem(price=1000,gem_properties_id=gem_p)
     return gem
+
 # funtion that will be used to create tables in database
 def create_gems_db():
     # for i in range(10):

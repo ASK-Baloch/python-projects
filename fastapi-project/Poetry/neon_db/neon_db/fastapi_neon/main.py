@@ -1,9 +1,20 @@
 # main.py
 from contextlib import asynccontextmanager
 from typing import Union, Optional, Annotated
-from settings import  TEST_DATABASE_URL,DATABASE_URL
+# from settings import  TEST_DATABASE_URL,DATABASE_URL
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from fastapi import FastAPI, Depends
+from starlette.config import Config
+from starlette.datastructures import Secret
+
+try:
+    config = Config(".env")
+except FileNotFoundError:
+    config = Config()
+
+DATABASE_URL = config("DATABASE_URL", cast=Secret)
+
+TEST_DATABASE_URL = config("TEST_DATABASE_URL", cast=Secret)
 
 
 class Todo(SQLModel, table=True):

@@ -1,4 +1,4 @@
-def insert(arr, S, N, element, K):
+def insert(arr: list[int], S: int, N: int, element: int, K: int):
     """Inserts an element into the array at a specified index.
 
     Args:
@@ -45,30 +45,30 @@ def insert(arr, S, N, element, K):
 arr = [None] * 6  # Initialize array with size 6
 N = 0  # Initially no elements
 
-try:
+# try:
 # Insert element 10 at index 0 (beginning)
-    new_arr, success, error_msg, N = insert(arr, 6, N, 10, 0)
+new_arr, success, error_msg, N = insert(arr, 6, N, 10, 0)
 
-    if success:
-        print("Insertion successful! New array:", new_arr)
-    else:
-        print("Insertion failed:", error_msg)
+if success:
+    print("Insertion successful! New array:", new_arr)
+else:
+    print("Insertion failed:", error_msg)
 
     # Now, insert element 20 at index 1
-    new_arr, success, error_msg, N = insert(new_arr, 6, N, 20, 1)
+#     new_arr, success, error_msg, N = insert(new_arr, 6, N, 20, 1)
 
-    if success:
-        print("Insertion successful! New array:", new_arr)
-    else:
-        print("Insertion failed:", error_msg)
+#     if success:
+#         print("Insertion successful! New array:", new_arr)
+#     else:
+#         print("Insertion failed:", error_msg)
 
-    # Now, insert element 30 at index 2
-    new_arr, success, error_msg, N = insert(new_arr, 6, N, 30, 2)
+#     # Now, insert element 30 at index 2
+#     new_arr, success, error_msg, N = insert(new_arr, 6, N, 30, 2)
 
-    if success:
-        print("Insertion successful! New array:", new_arr)
-    else:
-        print("Insertion failed:", error_msg)
+#     if success:
+#         print("Insertion successful! New array:", new_arr)
+#     else:
+#         print("Insertion failed:", error_msg)
 
-except IndexError as e:
-    print("Index Error:", e)
+# except IndexError as e:
+#     print("Index Error:", e)

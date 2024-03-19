@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./fastapi-project/GEMS_WORK/models"
+    ]
+}

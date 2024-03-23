@@ -1,20 +1,9 @@
 # main.py
 from contextlib import asynccontextmanager
 from typing import Union, Optional, Annotated
-# from settings import  TEST_DATABASE_URL,DATABASE_URL
+from fastapi1 import settings
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from fastapi import FastAPI, Depends
-from starlette.config import Config
-from starlette.datastructures import Secret
-
-# try:
-#     config = Config(".env")
-# except FileNotFoundError:
-#     config = Config()
-
-# DATABASE_URL = config("DATABASE_URL", cast=Secret)
-# TEST_DATABASE_URL = config("TEST_DATABASE_URL", cast=Secret)
-DATABASE_URL = "postgresql://ASK-Baloch:nguHM17PVNEz@ep-falling-surf-a5h154g7.us-east-2.aws.neon.tech/neondb?sslmode=require"
 
 
 class Todo(SQLModel, table=True):
@@ -24,7 +13,7 @@ class Todo(SQLModel, table=True):
 
 # only needed for psycopg 3 - replace postgresql
 # with postgresql+psycopg in settings.DATABASE_URL
-connection_string = str(DATABASE_URL).replace(
+connection_string = str(settings.DATABASE_URL).replace(
     "postgresql", "postgresql+psycopg"
 )
 
@@ -46,7 +35,7 @@ def create_db_and_tables():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("Creating tables..")
-    create_db_and_tables()
+    # create_db_and_tables()
     yield
 
 
@@ -76,14 +65,3 @@ def create_todo(todo: Todo, session: Annotated[Session, Depends(get_session)]):
     session.commit()
     session.refresh(todo)
     return todo
-
-
-@app.get("/todos/", response_model=list[Todo])
-def read_todos(session: Annotated[Session, Depends(get_session)]):
-    todos = session.exec(select(Todo)).all()
-    return todos
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="localhost:8000", port=8000)

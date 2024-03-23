@@ -66,3 +66,7 @@ def create_todo(todo: Todo, session: Annotated[Session, Depends(get_session)]):
     session.refresh(todo)
     return todo
 
+@app.get("/todos/", response_model=list[Todo])
+def read_todos(session: Annotated[Session, Depends(get_session)]):
+    todos = session.exec(select(Todo)).all()
+    return todos

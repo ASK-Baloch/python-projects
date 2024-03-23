@@ -65,3 +65,4 @@ def create_todo(todo: Todo, session: Annotated[Session, Depends(get_session)]):
     session.commit()
     session.refresh(todo)
     return todo
+

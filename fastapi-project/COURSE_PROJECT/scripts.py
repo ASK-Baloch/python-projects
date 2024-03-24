@@ -41,7 +41,7 @@ with Session(engine) as session:
         session.add(course_obj)
     session.commit()
 
-    session.execute("CREATE INDEX idx_course_name ON courses USING GIN(name)")
+    session.exec("CREATE INDEX idx_course_name ON courses USING GIN(name)")
     session.commit()
 
 print("Courses data successfully imported into PostgreSQL.")

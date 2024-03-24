@@ -16,3 +16,20 @@ class course(SQLModel):
     chapters: str = Field(default="", sa_column_kwargs={"type": "JSONB"})
     rating: dict = Field(default={"total": 0, "count": 0})
 
+
+# Connect to PostgreSQL database
+engine = create_engine(postgres_url, echo=True)
+
+
+def create_db_and_tables():
+    SQLModel.metadata.create_all(engine)
+
+
+# Read courses from courses.json
+with open("courses.json", "r") as f:
+    courses = json.load(f)
+
+# Add rating field to each course and chapter
+for course in courses:
+    course["chapters"] = [{"rating": {"total": 0, "count": 0}} for _ in course["chapters"]]
+    course["rating"] = {"total": 0, "count": 0}

@@ -14,3 +14,11 @@ insert_element(my_array, len(my_array), new_element, position)
 
 print("Array after insertion:", my_array)
 
+def traverse_array(arr):
+    for i in range(len(arr)):
+        print(f"arr[{i}] = {arr[i]}")
+
+# Example usage:
+my_array = [53, 99, -11, 5, 102]
+print("Array elements:")
+traverse_array(my_array)

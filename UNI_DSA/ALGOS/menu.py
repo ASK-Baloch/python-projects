@@ -63,15 +63,19 @@ def Searching():
     OP = int(input())
 
     if OP == 1:
+        print(OP,":Binary Single Search.....")
         Item = int(input("Enter the item you want to search: "))
         BinarySearch(Item)
     elif OP == 2:
+        print(OP,":Binary Multi Search.....")
         Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
         MultiBinarySearch(Items)
     elif OP == 3:
+        print(OP,":Linear Single Search.....")
         Item = int(input("Enter the item you want to search: "))
         LinearSearch(Item)
     elif OP == 4:
+        print(OP,":Linear Multi Search.....")
         Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
         MultiLinearSearch(Items)
     else:

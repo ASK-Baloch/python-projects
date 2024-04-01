@@ -51,8 +51,10 @@ for i in range(operations):
         print(OP,":Insetion Selected")
         Insertion()
     elif OP == 3:
+        print(OP,":Deletion Selected") 
         Deletion()
     elif OP == 4:
+        print(OP,":Traverse Selected") 
         break
     else:
         print("Invalid Option")

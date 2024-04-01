@@ -115,6 +115,8 @@ def MultiLinearSearch(Items):
     for Item in Items:
         LinearSearch(Item)
 
+#                               SORTING FUNCTION
+        
 
 #                               MAIN FUNCTION 
 for i in range(operations):

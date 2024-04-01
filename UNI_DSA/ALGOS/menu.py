@@ -60,6 +60,7 @@ def Searching():
     print("For Multi Binary Search press 2")
     print("For Single Linear Search press 3")
     print("For Multi Linear Search press 4")
+    print("...........................")
     OP = int(input())
 
     if OP == 1:
@@ -119,6 +120,7 @@ for i in range(operations):
     print("For Searching press 3")
     print("For Deletion press 4")
     print("For Exit press 5")
+    print("...........................")
     OP = int(input())
     if OP == 1:
         print(OP, ":Traverse Selected")

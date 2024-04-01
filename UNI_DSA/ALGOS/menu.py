@@ -1,17 +1,19 @@
+#                               GLOBAL VARIABLES
+
 A = []
 N = 0
 LB = 0
 Size = 7
 operations = 5
 
-
+#                               TRAVERSAL CODE
 def Traverse():
     global N, LB
     for i in range(LB, N+LB):
         print(A[i], end=',')
     print("...........................")
 
-
+#                               INSERTION FUNCTIONS
 def Insertion():
     global N, LB, Size
     print('Enter the element you want to insert:')
@@ -32,7 +34,7 @@ def Insertion():
                 print(A[i], end=',')
             print("...........................")
 
-
+#                               DELETION FUNCTION 
 def Deletion():
     global N, LB
     print('Enter the index where you want deletion')  # position to delete
@@ -52,6 +54,7 @@ def Deletion():
                 print(A[i], end=',')
             print("...........................")
 
+#                               SEARCHING FUNCTIONS
 
 def Searching():
     global N, LB
@@ -113,6 +116,7 @@ def MultiLinearSearch(Items):
         LinearSearch(Item)
 
 
+#                               MAIN FUNCTION 
 for i in range(operations):
     print("Select one Operation in given below")
     print("For Traversing press 1")

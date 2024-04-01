@@ -2,14 +2,14 @@ A = []
 N = 0
 LB = 0
 Size = 7
-operations = 4
+operations = 5
 
 
 def Traverse():
     global N, LB
     for i in range(LB, N+LB):
-        print(A[i])
-    print()
+        print(A[i], end=',')
+    print("...........................")
 
 
 def Insertion():
@@ -29,15 +29,14 @@ def Insertion():
             N += 1
             print("Now the array elements are ")
             for i in range(N):
-                print(A[i])
+                print(A[i], end=',')
             print("...........................")
 
 
 def Deletion():
     global N, LB
-    print('Enter the index where you want insertion') # position to delete
-    K = int(input()) 
-
+    print('Enter the index where you want deletion')  # position to delete
+    K = int(input())
 
     if N == 0:
         print("Underflow")
@@ -50,17 +49,72 @@ def Deletion():
             N -= 1
             print("Now the array elements are ")
             for i in range(N):
-                print(A[i])
+                print(A[i], end=',')
             print("...........................")
 
+
+def Searching():
+    global N, LB
+    print("Select one Operation in given below")
+    print("For Single Binary Search press 1")
+    print("For Multi Binary Search press 2")
+    print("For Single Linear Search press 3")
+    print("For Multi Linear Search press 4")
+    OP = int(input())
+
+    if OP == 1:
+        Item = int(input("Enter the item you want to search: "))
+        BinarySearch(Item)
+    elif OP == 2:
+        Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
+        MultiBinarySearch(Items)
+    elif OP == 3:
+        Item = int(input("Enter the item you want to search: "))
+        LinearSearch(Item)
+    elif OP == 4:
+        Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
+        MultiLinearSearch(Items)
+    else:
+        print("Invalid Option")
+
+def BinarySearch(Item):
+    low = LB
+    high = N + LB - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if A[mid] < Item:
+            low = mid + 1
+        elif A[mid] > Item:
+            high = mid - 1
+        else:
+            print(f"Item {Item} found at position {mid}")
+            return
+    print(f"Item {Item} not found")
+
+def MultiBinarySearch(Items):
+    for Item in Items:
+        BinarySearch(Item)
+
+def LinearSearch(Item):
+    for i in range(LB, N + LB):
+        if A[i] == Item:
+            print(f"Item {Item} found at position {i}")
+            return
+    print(f"Item {Item} not found")
+
+def MultiLinearSearch(Items):
+    for Item in Items:
+        LinearSearch(Item)
 
 
 for i in range(operations):
     print("Select one Operation in given below")
     print("For Traversing press 1")
     print("For Insertion press 2")
-    print("For Deletion press 3")
-    print("For Exit press 4")
+    print("For Searching press 3")
+    print("For Deletion press 4")
+    print("For Exit press 5")
     OP = int(input())
     if OP == 1:
         print(OP, ":Traverse Selected")
@@ -69,9 +123,12 @@ for i in range(operations):
         print(OP, ":Insetion Selected")
         Insertion()
     elif OP == 3:
+        print(OP, ":Searching Selected")
+        Searching()
+    elif OP == 4:
         print(OP, ":Deletion Selected")
         Deletion()
-    elif OP == 4:
+    elif OP == 5:
         print("Exiting...")
         break
     else:

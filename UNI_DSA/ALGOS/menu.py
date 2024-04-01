@@ -30,11 +30,29 @@ def Insertion():
             print("Now the array elements are ")
             for i in range(N):
                 print(A[i])
-            print()
+            print("...........................")
 
 
 def Deletion():
-    pass
+    global N, LB
+    print('Enter the index where you want insertion') # position to delete
+    K = int(input()) 
+
+
+    if N == 0:
+        print("Underflow")
+    else:
+        if K < LB or K > N + LB - 1:
+            print("K is Invalid")
+        else:
+            for i in range(K, N + LB - 1):
+                A[i] = A[i + 1]
+            N -= 1
+            print("Now the array elements are ")
+            for i in range(N):
+                print(A[i])
+            print("...........................")
+
 
 
 for i in range(operations):
@@ -45,16 +63,16 @@ for i in range(operations):
     print("For Exit press 4")
     OP = int(input())
     if OP == 1:
-        print(OP,":Traverse Selected")
+        print(OP, ":Traverse Selected")
         Traverse()
     elif OP == 2:
-        print(OP,":Insetion Selected")
+        print(OP, ":Insetion Selected")
         Insertion()
     elif OP == 3:
-        print(OP,":Deletion Selected") 
+        print(OP, ":Deletion Selected")
         Deletion()
     elif OP == 4:
-        print(OP,":Traverse Selected") 
+        print("Exiting...")
         break
     else:
         print("Invalid Option")

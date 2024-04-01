@@ -1,12 +1,14 @@
 #                               GLOBAL VARIABLES
 
-A = []
-N = 0
-LB = 0
-Size = 7
-operations = 5
+A: list[int] = []
+N: int = 0
+LB: int = 0
+Size: int = 7
+operations: int = 5
 
 #                               TRAVERSAL CODE
+
+
 def Traverse():
     global N, LB
     for i in range(LB, N+LB):
@@ -14,6 +16,8 @@ def Traverse():
     print("...........................")
 
 #                               INSERTION FUNCTIONS
+
+
 def Insertion():
     global N, LB, Size
     print('Enter the element you want to insert:')
@@ -34,7 +38,9 @@ def Insertion():
                 print(A[i], end=',')
             print("...........................")
 
-#                               DELETION FUNCTION 
+#                               DELETION FUNCTION
+
+
 def Deletion():
     global N, LB
     print('Enter the index where you want deletion')  # position to delete
@@ -56,6 +62,7 @@ def Deletion():
 
 #                               SEARCHING FUNCTIONS
 
+
 def Searching():
     global N, LB
     print("Select one Operation in given below")
@@ -67,23 +74,26 @@ def Searching():
     OP = int(input())
 
     if OP == 1:
-        print(OP,":Binary Single Search.....")
+        print(OP, ":Binary Single Search.....")
         Item = int(input("Enter the item you want to search: "))
         BinarySearch(Item)
     elif OP == 2:
-        print(OP,":Binary Multi Search.....")
-        Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
+        print(OP, ":Binary Multi Search.....")
+        Items = list(map(int, input(
+            "Enter the items you want to search, separated by space: ").split()))
         MultiBinarySearch(Items)
     elif OP == 3:
-        print(OP,":Linear Single Search.....")
+        print(OP, ":Linear Single Search.....")
         Item = int(input("Enter the item you want to search: "))
         LinearSearch(Item)
     elif OP == 4:
-        print(OP,":Linear Multi Search.....")
-        Items = list(map(int, input("Enter the items you want to search, separated by space: ").split()))
+        print(OP, ":Linear Multi Search.....")
+        Items = list(map(int, input(
+            "Enter the items you want to search, separated by space: ").split()))
         MultiLinearSearch(Items)
     else:
         print("Invalid Option")
+
 
 def BinarySearch(Item):
     low = LB
@@ -100,9 +110,11 @@ def BinarySearch(Item):
             return
     print(f"Item {Item} not found")
 
+
 def MultiBinarySearch(Items):
     for Item in Items:
         BinarySearch(Item)
+
 
 def LinearSearch(Item):
     for i in range(LB, N + LB):
@@ -111,14 +123,15 @@ def LinearSearch(Item):
             return
     print(f"Item {Item} not found")
 
+
 def MultiLinearSearch(Items):
     for Item in Items:
         LinearSearch(Item)
 
 #                               SORTING FUNCTION
-        
 
-#                               MAIN FUNCTION 
+
+#                               MAIN FUNCTION
 for i in range(operations):
     print("Select one Operation in given below")
     print("For Traversing press 1")

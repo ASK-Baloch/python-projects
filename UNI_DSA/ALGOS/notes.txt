@@ -1,0 +1,19 @@
+def Insertion():
+    global N, LB, Size
+    print('Enter the element you want to insert:')
+    Item = int(input())
+    print('Enter the index where you want insertion')
+    K = int(input())
+
+    if N == Size:
+        print("Overflow")
+    else:
+        if K < LB or K > N + LB:
+            print("K is Invalid")
+        else:
+            A.insert(K, Item)
+            N += 1
+            print("Now the array elements are ")
+            for i in range(N):
+                print(A[i], end=',')
+            print("...........................")

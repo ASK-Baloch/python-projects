@@ -183,4 +183,72 @@ public class Main {
             LinearSearch(Integer.parseInt(item));
         }
     }
-}
+        System.out.println("Select one Operation in given below");
+        System.out.println("For Bubble Sort press 1");
+        System.out.println("For Insertion Sort press 2");
+        System.out.println("For Shell Sort press 3");
+        int OP = scanner.nextInt();
+        System.out.println("For Ascending Order press 1");
+        System.out.println("For Descending Order press 2");
+        int Order = scanner.nextInt();
+
+        if (OP == 1) {
+            bubbleSort(Order);
+        } else if (OP == 2) {
+            insertionSort(Order);
+        } else if (OP == 3) {
+            shellSort(Order);
+        } else {
+            System.out.println("Invalid Option");
+        }
+    }
+
+    public static void bubbleSort(int Order) {
+        for (int i = 0; i < N - 1; i++) {
+            for (int j = 0; j < N - i - 1; j++) {
+                if ((Order == 1 && A[j] > A[j + 1]) || (Order == 2 && A[j] < A[j + 1])) {
+                    int temp = A[j];
+                    A[j] = A[j + 1];
+                    A[j + 1] = temp;
+                }
+            }
+        }
+        printArray();
+    }
+
+    public static void insertionSort(int Order) {
+        for (int i = 1; i < N; i++) {
+            int key = A[i];
+            int j = i - 1;
+            while (j >= 0 && ((Order == 1 && key < A[j]) || (Order == 2 && key > A[j]))) {
+                A[j + 1] = A[j];
+                j = j - 1;
+            }
+            A[j + 1] = key;
+        }
+        printArray();
+    }
+
+    public static void shellSort(int Order) {
+        int gap = N / 2;
+        while (gap > 0) {
+            for (int i = gap; i < N; i++) {
+                int temp = A[i];
+                int j = i;
+                while (j >= gap && ((Order == 1 && A[j - gap] > temp) || (Order == 2 && A[j - gap] < temp))) {
+                    A[j] = A[j - gap];
+                    j -= gap;
+                }
+                A[j] = temp;
+            }
+            gap /= 2;
+        }
+        printArray();
+    }
+
+    public static void printArray() {
+        for (int i = 0; i < N; i++) {
+            System.out.print(A[i] + " ");
+        }
+        System.out.println();
+    }

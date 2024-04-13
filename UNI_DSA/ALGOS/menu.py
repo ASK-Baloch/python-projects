@@ -1,8 +1,7 @@
-from Functions.traverse import Traverse
+#                              IMPORTS
+# from Functions.traverse import Traverse
+# adding comment . New code should be added and add more algos 
 #                               GLOBAL VARIABLES
-
-
-
 A: list[int] = [None]*7
 N: int = 0
 LB: int = 0
@@ -10,12 +9,16 @@ Size: int = 7
 operations: int = 10
 
 #                               TRAVERSAL CODE
+
+
 def Traverse():
     global N, LB
     for i in range(LB, N+LB):
         print(A[i], end=',')
     print("...........................")
 #                               INSERTION FUNCTIONS
+
+
 def Insertion():
     global N, LB, Size
     print('Enter the element you want to insert:')
@@ -50,6 +53,8 @@ def Insertion():
                 print(A[i], end=',')
             print("...........................")
 #                               DELETION FUNCTION
+
+
 def Deletion():
     global N, LB
     print('Enter the index where you want deletion')  # position to delete
@@ -69,6 +74,8 @@ def Deletion():
                 print(A[i], end=',')
             print("...........................")
 #                               SEARCHING FUNCTIONS
+
+
 def Searching():
     global N, LB
     print("Select one Operation in given below")
@@ -86,7 +93,7 @@ def Searching():
     elif OP == 2:
         print(OP, ":Binary Multi Search.....")
         Items = list(map(int, input(
-            "Enter the items you want to search, separated by space: ").split()))
+            "Enter the item you want to count: ").split()))
         MultiBinarySearch(Items)
     elif OP == 3:
         print(OP, ":Linear Single Search.....")
@@ -95,41 +102,70 @@ def Searching():
     elif OP == 4:
         print(OP, ":Linear Multi Search.....")
         Items = list(map(int, input(
-            "Enter the items you want to search, separated by space: ").split()))
+            "Enter the items you want to count: ").split()))
         MultiLinearSearch(Items)
     else:
         print("Invalid Option")
 
-    def BinarySearch(Item):
-        low = LB
-        high = N + LB - 1
 
-        while low <= high:
-            mid = (low + high) // 2
-            if A[mid] < Item:
-                low = mid + 1
-            elif A[mid] > Item:
-                high = mid - 1
-            else:
-                print(f"Item {Item} found at position {mid}")
-                return
+def BinarySearch(Item):
+    low = LB
+    high = N + LB - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if A[mid] < Item:
+            low = mid + 1
+        elif A[mid] > Item:
+            high = mid - 1
+        else:
+            print(f"Item {Item} found at position {mid}")
+            return
+    print(f"Item {Item} not found")
+
+
+def CountBinarySearch(Item):
+    count = 0
+    for i in range(LB, N + LB):
+        if A[i] == Item:
+            count += 1
+    print(f"Item {Item} found {count} times")
+
+
+def MultiBinarySearch(Items):
+    for Item in Items:
+        CountBinarySearch(Item)
+
+
+def LinearSearch(Item):
+    for i in range(LB, N + LB):
+        if A[i] == Item:
+            print(f"Item {Item} found at position {i}")
+            return
+    print(f"Item {Item} not found")
+
+
+def CountLinearSearch(Item):
+    count = 0
+    positions = []
+    for i in range(LB, N + LB):
+        if A[i] == Item:
+            count += 1
+            positions.append(i)
+    if count > 0:
+        print(f"Item {Item} found {count} times at positions {positions}")
+    else:
         print(f"Item {Item} not found")
 
-    def MultiBinarySearch(Items):
-        for Item in Items:
-            BinarySearch(Item)
 
-    def LinearSearch(Item):
-        for i in range(LB, N + LB):
-            if A[i] == Item:
-                print(f"Item {Item} found at position {i}")
-                return
-        print(f"Item {Item} not found")
+def MultiLinearSearch(Items):
+    for Item in Items:
+        CountLinearSearch(Item)
 
-    def MultiLinearSearch(Items):
-        for Item in Items:
-            LinearSearch(Item)
+
 #                               SORTING FUNCTION
+
+
 def Sorting():
     print("Select one Operation in given below")
     print("For Bubble Sort press 1")
@@ -149,38 +185,43 @@ def Sorting():
     else:
         print("Invalid Option")
 
-    def BubbleSort(Order):
-        global A, N
-        for i in range(N):
-            for j in range(0, N-i-1):
-                if (Order == 1 and A[j] > A[j+1]) or (Order == 2 and A[j] < A[j+1]):
-                    A[j], A[j+1] = A[j+1], A[j]
-        print("Sorted array is:", A)
 
-    def InsertionSort(Order):
-        global A, N
-        for i in range(1, N):
-            key = A[i]
-            j = i-1
-            while j >= 0 and ((Order == 1 and key < A[j]) or (Order == 2 and key > A[j])):
-                A[j+1] = A[j]
-                j -= 1
-            A[j+1] = key
-        print("Sorted array is:", A)
+def BubbleSort(Order):
+    global A, N
+    for i in range(N):
+        for j in range(0, N-i-1):
+            if (Order == 1 and A[j] > A[j+1]) or (Order == 2 and A[j] < A[j+1]):
+                A[j], A[j+1] = A[j+1], A[j]
+    print("Sorted array is:", A)
 
-    def ShellSort(Order):
-        global A, N
-        gap = N // 2
-        while gap > 0:
-            for i in range(gap, N):
-                temp = A[i]
-                j = i
-                while j >= gap and ((Order == 1 and A[j-gap] > temp) or (Order == 2 and A[j-gap] < temp)):
-                    A[j] = A[j-gap]
-                    j -= gap
-                A[j] = temp
-            gap //= 2
-        print("Sorted array is:", A)
+
+def InsertionSort(Order):
+    global A, N
+    for i in range(1, N):
+        key = A[i]
+        j = i-1
+        while j >= 0 and ((Order == 1 and key < A[j]) or (Order == 2 and key > A[j])):
+            A[j+1] = A[j]
+            j -= 1
+        A[j+1] = key
+    print("Sorted array is:", A)
+
+
+def ShellSort(Order):
+    global A, N
+    gap = N // 2
+    while gap > 0:
+        for i in range(gap, N):
+            temp = A[i]
+            j = i
+            while j >= gap and ((Order == 1 and A[j-gap] > temp) or (Order == 2 and A[j-gap] < temp)):
+                A[j] = A[j-gap]
+                j -= gap
+            A[j] = temp
+        gap //= 2
+    print("Sorted array is:", A)
+
+
 #                               MAIN FUNCTION
 for i in range(operations):
     print("Select one Operation in given below")

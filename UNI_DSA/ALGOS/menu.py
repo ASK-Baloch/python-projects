@@ -1,6 +1,9 @@
 #                              IMPORTS
 # from Functions.traverse import Traverse
 # adding comment . New code should be added and add more algos 
+# like more sorting algos and searching algos.merge sort ascending and descdening order
+# quick sort ascending and descending order
+
 #                               GLOBAL VARIABLES
 A: list[int] = [None]*7
 N: int = 0

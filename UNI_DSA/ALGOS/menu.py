@@ -256,3 +256,6 @@ for i in range(operations):
         break
     else:
         print("Invalid Option")
+
+
+                    # MORE ALGOS WILL BE HERE

@@ -83,16 +83,18 @@ def queue():
             
             choice = int(input())
             if choice == 1:
-                print("which item you want to push")
+                print("which item you want to insert in queue")
                 item = int(input())
-                Stack.push(item)
+                Queue.Q_insertion(item)
             elif choice == 2:
-                Stack.pop()
+                Queue.Q_deletion()
             elif choice == 3:
-                print("which item you want to delete")
+                print("which item you want to insert in circular queue")
                 item = int(input())
-                Stack.delete(item) 
+                Queue.CQ_insertion(item) 
             elif choice == 4:
+                Queue.CQ_deletion() 
+            elif choice == 5:
                 print('Exiting..')
                 break
             else:

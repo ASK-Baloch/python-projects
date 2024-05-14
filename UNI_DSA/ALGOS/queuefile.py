@@ -11,108 +11,108 @@ F = LB - 1  # Front (initially empty)
 R = LB - 1  # Rear (initially empty)
 class Queue:
 
-   def Q_insertion(item):
-    global Q, LB, F, R
+    def Q_insertion(item):
+        global Q, LB, F, R
 
-    # Check for full queue
-    if (R == size + LB - 1):
-        print("Queue is full, no insertion")
+        # Check for full queue
+        if (R == size + LB - 1):
+            print("Queue is full, no insertion")
+            return Q
+
+        # Handle empty queue or wrap-around case
+        if (R == LB - 1):
+            R = LB
+            F = LB
+        else:
+            R += 1
+
+        # Insert item at the rear
+        Q[R] = item
+
+        print("Queue after insertion:", Q)
         return Q
 
-    # Handle empty queue or wrap-around case
-    if (R == LB - 1):
-        R = LB
-        F = LB
-    else:
-        R += 1
 
-    # Insert item at the rear
-    Q[R] = item
+    def Q_deletion():
+        global Q, LB, F, R
 
-    print("Queue after insertion:", Q)
-    return Q
+        # Check for empty queue
+        if (F == LB - 1):
+            print("Queue is empty")
+            return Q
 
+        # Remove item from the front
+        item = Q[F]
 
-def Q_deletion():
-    global Q, LB, F, R
+        # Handle single-element queue or wrap-around case
+        if (F == R):
+            F = LB - 1
+            R = LB - 1
+        else:
+            F += 1
 
-    # Check for empty queue
-    if (F == LB - 1):
-        print("Queue is empty")
-        return Q
-
-    # Remove item from the front
-    item = Q[F]
-
-    # Handle single-element queue or wrap-around case
-    if (F == R):
-        F = LB - 1
-        R = LB - 1
-    else:
-        F += 1
-
-    print("Queue after deletion:", Q)
-    return item
+        print("Queue after deletion:", Q)
+        return item
 
 
-def CQ_insertion(item):
-    """Inserts an item into the circular queue.
+    def CQ_insertion(item):
+        """Inserts an item into the circular queue.
 
-    Args:
-        item: The item to be inserted.
+        Args:
+            item: The item to be inserted.
 
-    Returns:
-        The updated queue or a message if the queue is full.
-    """
+        Returns:
+            The updated queue or a message if the queue is full.
+        """
 
-    global F, R, size, CQ
+        global F, R, size, CQ 
 
-    # Check for full queue (using two conditions)
-    if ((F == LB) and (R == size + LB - 1)) or (F == R - 1):
-        print("No more insertion cause it's full")
+        # Check for full queue (using two conditions)
+        if ((F == LB) and (R == size + LB - 1)) or (F == R - 1):
+            print("No more insertion cause it's full")
+            return CQ
+
+        # Handle empty queue or wrap-around cases
+        if (R == LB - 1):
+            R += 1
+            F += 1
+        elif (R == size + LB - 1):
+            R = LB
+        else:
+            R += 1
+
+        # Insert item at the rear
+        CQ[R] = item
+
+        print("Circular Queue after insertion:", CQ)
         return CQ
 
-    # Handle empty queue or wrap-around cases
-    if (R == LB - 1):
-        R += 1
-        F += 1
-    elif (R == size + LB - 1):
-        R = LB
-    else:
-        R += 1
 
-    # Insert item at the rear
-    CQ[R] = item
+    def CQ_deletion():
+        """Deletes an item from the circular queue.
 
-    print("Circular Queue after insertion:", CQ)
-    return CQ
+        Returns:
+            The removed item or a message if the queue is empty.
+        """
 
+        global CQ, LB, size, F , R
 
-def CQ_deletion():
-    """Deletes an item from the circular queue.
+        # Check for empty queue
+        if (F == LB - 1):
+            print("Queue is empty")
+            return CQ
 
-    Returns:
-        The removed item or a message if the queue is empty.
-    """
+        # Remove item from the front
+        item = CQ[F]
 
-    global CQ, LB, size, F
+        # Handle single-element queue or wrap-around cases
+        if (F == R):
+            F = LB - 1
+            R = LB - 1
+        elif (F == size + LB - 1):
+            F = LB
+        else:
+            F += 1
 
-    # Check for empty queue
-    if (F == LB - 1):
-        print("Queue is empty")
-        return CQ
-
-    # Remove item from the front
-    item = CQ[F]
-
-    # Handle single-element queue or wrap-around cases
-    if (F == R):
-        F = LB - 1
-        R = LB - 1
-    elif (F == size + LB - 1):
-        F = LB
-    else:
-        F += 1
-
-    print("Circular Queue after deletion:", CQ)
-    return item
+        print("Circular Queue after deletion:", CQ)
+        return item

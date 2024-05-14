@@ -80,9 +80,119 @@ class Array:
                 print("...........................")
     #                               SEARCHING FUNCTIONS
 
+    def BinarySearch(Item):
+                low = LB
+                high = N + LB - 1
 
+                while low <= high:
+                    mid = (low + high) // 2
+                    if A[mid] < Item:
+                        low = mid + 1
+                    elif A[mid] > Item:
+                        high = mid - 1
+                    else:
+                        print(f"Item {Item} found at position {mid}")
+                        return
+                print(f"Item {Item} not found")
+
+
+    # def CountBinarySearch(Item):
+    #             count = 0
+    #             for i in range(LB, N + LB):
+    #                 if A[i] == Item:
+    #                     count += 1
+    #             print(f"Item {Item} found {count} times")
+
+
+    def MultiBinarySearch(Items):
+                for Item in Items:
+                    count = 0
+                    for i in range(LB, N + LB):
+                        if A[i] == Item:
+                            count += 1
+                    print(f"Item {Item} found {count} times")
+
+
+    def LinearSearch(Item):
+                for i in range(LB, N + LB):
+                    if A[i] == Item:
+                        print(f"Item {Item} found at position {i}")
+                        return
+                print(f"Item {Item} not found")
+
+
+    # def CountLinearSearch(Item):
+    #             count = 0
+    #             positions = []
+    #             for i in range(LB, N + LB):
+    #                 if A[i] == Item:
+    #                     count += 1
+    #                     positions.append(i)
+    #             if count > 0:
+    #                 print(f"Item {Item} found {count} times at positions {positions}")
+    #             else:
+    #                 print(f"Item {Item} not found")
+
+
+    def MultiLinearSearch(Items):
+                for Item in Items:
+                        count = 0
+                        positions = []
+                        for i in range(LB, N + LB):
+                            if A[i] == Item:
+                                count += 1
+                                positions.append(i)
+                        if count > 0:
+                            print(f"Item {Item} found {count} times at positions {positions}")
+                        else:
+                            print(f"Item {Item} not found")
     def Searching():
         global N, LB
+        def BinarySearch(Item):
+                low = LB
+                high = N + LB - 1
+
+                while low <= high:
+                    mid = (low + high) // 2
+                    if A[mid] < Item:
+                        low = mid + 1
+                    elif A[mid] > Item:
+                        high = mid - 1
+                    else:
+                        print(f"Item {Item} found at position {mid}")
+                        return
+                print(f"Item {Item} not found")
+        def MultiBinarySearch(Items):
+                for Item in Items:
+                    count = 0
+                    for i in range(LB, N + LB):
+                        if A[i] == Item:
+                            count += 1
+                    print(f"Item {Item} found {count} times")
+
+
+        def LinearSearch(Item):
+                for i in range(LB, N + LB):
+                    if A[i] == Item:
+                        print(f"Item {Item} found at position {i}")
+                        return
+                print(f"Item {Item} not found")    
+                
+                            
+        def MultiLinearSearch(Items):
+                for Item in Items:
+                        count = 0
+                        positions = []
+                        for i in range(LB, N + LB):
+                            if A[i] == Item:
+                                count += 1
+                                positions.append(i)
+                        if count > 0:
+                            print(f"Item {Item} found {count} times at positions {positions}")
+                        else:
+                            print(f"Item {Item} not found")
+                            
+                            
         print("Select one Operation in given below")
         print("For Single Binary Search press 1")
         print("For Multi Binary Search press 2")
@@ -111,87 +221,11 @@ class Array:
             MultiLinearSearch(Items)
         else:
             print("Invalid Option")
-
-
-        def BinarySearch(Item):
-            low = LB
-            high = N + LB - 1
-
-            while low <= high:
-                mid = (low + high) // 2
-                if A[mid] < Item:
-                    low = mid + 1
-                elif A[mid] > Item:
-                    high = mid - 1
-                else:
-                    print(f"Item {Item} found at position {mid}")
-                    return
-            print(f"Item {Item} not found")
-
-
-        def CountBinarySearch(Item):
-            count = 0
-            for i in range(LB, N + LB):
-                if A[i] == Item:
-                    count += 1
-            print(f"Item {Item} found {count} times")
-
-
-        def MultiBinarySearch(Items):
-            for Item in Items:
-                CountBinarySearch(Item)
-
-
-        def LinearSearch(Item):
-            for i in range(LB, N + LB):
-                if A[i] == Item:
-                    print(f"Item {Item} found at position {i}")
-                    return
-            print(f"Item {Item} not found")
-
-
-        def CountLinearSearch(Item):
-            count = 0
-            positions = []
-            for i in range(LB, N + LB):
-                if A[i] == Item:
-                    count += 1
-                    positions.append(i)
-            if count > 0:
-                print(f"Item {Item} found {count} times at positions {positions}")
-            else:
-                print(f"Item {Item} not found")
-
-
-        def MultiLinearSearch(Items):
-            for Item in Items:
-                CountLinearSearch(Item)
-
-
     #                               SORTING FUNCTION
 
 
     def Sorting():
-        print("Select one Operation in given below")
-        print("For Bubble Sort press 1")
-        print("For Insertion Sort press 2")
-        print("For Shell Sort press 3")
-        OP = int(input())
-        print("For Ascending Order press 1")
-        print("For Descending Order press 2")
-        Order = int(input())
-
-        if OP == 1:
-            BubbleSort(Order)
-        elif OP == 2:
-            InsertionSort(Order)
-        elif OP == 3:
-            ShellSort(Order)
-        else:
-            print("Invalid Option")
-
-
-            def BubbleSort(Order):
+        def BubbleSort(Order):
                 global A, N
                 for i in range(N):
                     for j in range(0, N-i-1):
@@ -225,6 +259,23 @@ class Array:
                     A[j] = temp
                 gap //= 2
             print("Sorted array is:", A)
+        print("Select one Operation in given below")
+        print("For Bubble Sort press 1")
+        print("For Insertion Sort press 2")
+        print("For Shell Sort press 3")
+        OP = int(input())
+        print("For Ascending Order press 1")
+        print("For Descending Order press 2")
+        Order = int(input())
+
+        if OP == 1:
+            BubbleSort(Order)
+        elif OP == 2:
+            InsertionSort(Order)
+        elif OP == 3:
+            ShellSort(Order)
+        else:
+            print("Invalid Option")
 
 
 # #                               MAIN FUNCTION

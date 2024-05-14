@@ -1,6 +1,6 @@
 #                               TRAVERSAL CODE
 # This function is used to traverse the array from the given lower bound to the upper bound.
-from menu import A, N, LB
+from arrayfile import A, N, LB
 
 
 def Traverse():

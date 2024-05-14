@@ -5,7 +5,9 @@
 # quick sort ascending and descending order
 
 #                               GLOBAL VARIABLES
-A: list[int] = [None]*7
+print('Enter the size of the Array  :')
+size:int = int(input())
+A: list[int] = [None]*size
 N: int = 0
 LB: int = 0
 Size: int = 7
@@ -224,6 +226,209 @@ def ShellSort(Order):
         gap //= 2
     print("Sorted array is:", A)
 
+#                               MERGING FUNCTION
+def merge(A, B):
+    C = []
+    i = j = 0
+
+    while i < len(A) and j < len(B):
+        if A[i] < B[j]:
+            C.append(A[i])
+            i += 1
+        else:
+            C.append(B[j])
+            j += 1
+
+    while i < len(A):
+        C.append(A[i])
+        i += 1
+
+    while j < len(B):
+        C.append(B[j])
+        j += 1
+
+    return C
+
+def merge_descending(A, B):
+    C = []
+    i = len(A) - 1
+    j = len(B) - 1
+
+    while i >= 0 and j >= 0:
+        if A[i] > B[j]:
+            C.append(A[i])
+            i -= 1
+        else:
+            C.append(B[j])
+            j -= 1
+
+    while i >= 0:
+        C.append(A[i])
+        i -= 1
+
+    while j >= 0:
+        C.append(B[j])
+        j -= 1
+
+    return C
+
+def mergesort_menu():
+    """
+    Presents a menu to the user for choosing sorting operations.
+    """
+    while True:
+        print("\nMenu:")
+        print("1. Merge Sort")
+        print("2. Merge Two Arrays")
+        print("3. Exit")
+
+        choice = int(input("Enter your choice (1-3): "))
+
+        if choice == 1:
+            A = [int(x) for x in input("Enter elements of array separated by space: ").split()]
+            low = 0
+            high = len(A) - 1
+            merge_sort(A, low, high)
+            print("Sorted array:", A)
+
+        elif choice == 2:
+            print("Enter elements for the first array:")
+            A = [int(x) for x in input("Enter elements of first array separated by space: ").split()]
+            print("Enter elements for the second array:")
+            B = [int(x) for x in input("Enter elements of second array separated by space: ").split()]
+            order = input("Enter order (ascending/descending, 1/2): ")
+
+            if order.lower() == 'ascending' or order == '1':
+                merged_array = merge(A, B)
+            elif order.lower() == 'descending' or order == '2':
+                merged_array = merge_descending(A, B)
+            else:
+                print("Invalid order. Merging in ascending order by default.")
+                merged_array = merge(A, B)
+
+            print("Merged array:", merged_array)
+
+        elif choice == 3:
+            print("Exiting...")
+            break
+
+
+def merging_2_arrays_ascending(A, B):
+    C = [0] * 10
+    lb = LB
+
+    A[0] = lb
+    B[0] = lb
+    C[0] = lb
+
+    while A[0] <= (A[N] + lb - 1) and B[N] <= (N + lb - 1):
+        if A[0] < B[0]:
+            C[0] = A[0]
+        else:
+            C[0] = B[0]
+            B[0] = B[0] + 1
+
+        C[0] = C[0] + 1
+
+    if A[0] > (A[N] + lb - 1):
+        while B[0] <= (N + lb - 1):
+            C[0] = B[0]
+            B[0] = B[0] + 1
+            C[0] = C[0] + 1
+    else:
+        while A[0] > (A[N] + lb - 1):
+            C[0] = A[0]
+            A[0] = A[0] + 1
+            C[0] = C[0] + 1
+
+    return C
+
+def merging_2_arrays_descending(A, B):
+    C = [0] * 10
+    lb = LB
+
+    A[0] = lb
+    B[0] = lb
+    C[0] = lb
+
+    while A[0] <= (A[N] + lb - 1) and B[N] >= (N + lb - 1):
+        if A[0] < B[0]:
+            C[0] = A[0]
+        else:
+            C[0] = B[0]
+            B[0] = B[0] + 1
+
+        C[0] = C[0] + 1
+
+    if A[0] > (A[N] + lb - 1):
+        while B[0] <= (N + lb - 1):
+            C[0] = B[0]
+            B[0] = B[0] + 1
+            C[0] = C[0] + 1
+    else:
+        while A[0] > (A[N] + lb - 1):
+            C[0] = A[0]
+            A[0] = A[0] + 1
+            C[0] = C[0] + 1
+
+    return C
+
+def merge_sort_sub(A, low, high):
+    if low < high:
+        mid = (low + high) // 2
+
+        merge_sort_sub(A, low, mid)
+        merge_sort_sub(A, mid + 1, high)
+        merge(A, low, mid, high)
+
+    return
+
+def merge_sort(A, LB, N):
+    low = LB
+    high = N + LB - 1
+    merge_sort_sub(A, low, high)
+
+    return
+
+def mergesort_menu():
+    """
+    Presents a menu to the user for choosing sorting operations.
+    """
+    while True:
+        print("\nMenu:")
+        print("1. Merge Sort")
+        print("2. Merge Two Arrays")
+        print("3. Exit")
+
+        choice = int(input("Enter your choice (1-3): "))
+
+        if choice == 1:
+            A = [int(x) for x in input("Enter elements of array separated by space: ").split()]
+            low = 0
+            high = len(A) - 1
+            merge_sort(A, LB, N)
+            print("Sorted array:", A)
+
+        elif choice == 2:
+            print("Enter elements for the first array:")
+            A = [int(x) for x in input("Enter elements of first array separated by space: ").split()]
+            print("Enter elements for the second array:")
+            B = [int(x) for x in input("Enter elements of second array separated by space: ").split()]
+            order = input("Enter order (ascending/descending): ")
+
+            if order.lower() == 'ascending':
+                merged_array = merge(A, B)
+            elif order.lower() == 'descending':
+                merged_array = merge_descending(A, B)
+            else:
+                print("Invalid order. Merging in ascending order by default.")
+                merged_array = merge(A, B)
+
+            print("Merged array:", merged_array)
+
+        elif choice == 3:
+            print("Exiting...")
+            break
 
 #                               MAIN FUNCTION
 for i in range(operations):
@@ -232,8 +437,9 @@ for i in range(operations):
     print("For Insertion press 2")
     print("For Searching press 3")
     print("For Sorting press 4")
-    print("For Deletion press 5")
-    print("For Exit press 6")
+    print("For Merging press 5")
+    print("For Deletion press 6")
+    print("For Exit press 7")
     print("...........................")
     OP = int(input())
     if OP == 1:
@@ -249,9 +455,12 @@ for i in range(operations):
         print(OP, ":Sorting Selected")
         Sorting()
     elif OP == 5:
+        print(OP, ":Merging Selected")
+        mergesort_menu()
+    elif OP == 6:
         print(OP, ":Deletion Selected")
         Deletion()
-    elif OP == 6:
+    elif OP == 7:
         print("Exiting...")
         break
     else:
@@ -259,4 +468,4 @@ for i in range(operations):
 
 
                     # MORE ALGOS WILL BE HERE
-        # ALTHOUGH IT WILL BE INSIDE SORTING FUNCTION
+        # ALTHOUGH IT WILL BE INSIDE SORTING FUNCTION``

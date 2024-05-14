@@ -76,9 +76,10 @@ def queue():
         for i in range(total_operations):
             print("............Select the choices given Below..........")
             print("1:Q_INSERTION")
-            print("2:POP")
-            print("3:DELETE")
-            print("4:EXIT")
+            print("2:Q_DELETION")
+            print("3:CQ_INSERTION")
+            print("4:CQ_DELETION")
+            print("5:EXIT")
             
             choice = int(input())
             if choice == 1:

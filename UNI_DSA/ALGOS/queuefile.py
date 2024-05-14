@@ -34,12 +34,6 @@ class Queue:
 
 
 def Q_deletion():
-    """Deletes an item from the queue (linear queue).
-
-    Returns:
-        The updated queue or a message if the queue is empty.
-    """
-
     global Q, LB, F, R
 
     # Check for empty queue

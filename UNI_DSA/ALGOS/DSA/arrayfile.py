@@ -1,9 +1,3 @@
-#                              IMPORTS
-# from Functions.traverse import Traverse
-# adding comment . New code should be added and add more algos 
-# like more sorting algos and searching algos.merge sort ascending and descdening order
-# quick sort ascending and descending order
-   
 A: list[int] = [None]*7
 N: int = 0
 LB: int = 0
@@ -94,15 +88,6 @@ class Array:
                         print(f"Item {Item} found at position {mid}")
                         return
                 print(f"Item {Item} not found")
-
-
-    # def CountBinarySearch(Item):
-    #             count = 0
-    #             for i in range(LB, N + LB):
-    #                 if A[i] == Item:
-    #                     count += 1
-    #             print(f"Item {Item} found {count} times")
-
 
     def MultiBinarySearch(Items):
                 for Item in Items:
@@ -259,10 +244,54 @@ class Array:
                     A[j] = temp
                 gap //= 2
             print("Sorted array is:", A)
-        print("Select one Operation in given below")
+        def merge(A, LB, m, r, ascending=True):
+            n1 = m - LB + 1
+            n2 = r - m
+            L = [0] * n1
+            R = [0] * n2
+
+            for i in range(n1):
+                L[i] = A[LB + i]
+            for j in range(n2):
+                R[j] = A[m + 1 + j]
+
+            i, j, k = 0, 0, LB
+            while i < n1 and j < n2:
+                if (ascending and L[i] <= R[j]) or (not ascending and L[i] >= R[j]):
+                    A[k] = L[i]
+                    i += 1
+                else:
+                    A[k] = R[j]
+                    j += 1
+                k += 1
+
+            while i < n1:
+                A[k] = L[i]
+                i += 1
+                k += 1
+
+            while j < n2:
+                A[k] = R[j]
+                j += 1
+                k += 1
+
+        def mergeSort(A, LB, r, ascending=True):
+            if LB < r:
+                m = LB + (r - LB) // 2
+                mergeSort(A, LB, m, ascending)
+                mergeSort(A, m + 1, r, ascending)
+                merge(A, LB, m, r, ascending)
+
+                if not ascending:
+                    # Reverse the sorted array for descending order
+                    A[LB:r+1] = A[LB:r+1][::-1]
+
+    
+        print("......Select one Operation in given below........")
         print("For Bubble Sort press 1")
         print("For Insertion Sort press 2")
         print("For Shell Sort press 3")
+        print("For Merge Sort press 4")
         OP = int(input())
         print("For Ascending Order press 1")
         print("For Descending Order press 2")
@@ -274,42 +303,101 @@ class Array:
             InsertionSort(Order)
         elif OP == 3:
             ShellSort(Order)
+        elif OP == 4:
+            ascending = Order == 1
+            mergeSort(A, 0, N - 1, ascending)
+
         else:
             print("Invalid Option")
 
-
-# #                               MAIN FUNCTION
-    # for i in range(operations):
-#         print("Select one Operation in given below")
-#         print("For Traversing press 1")
-#         print("For Insertion press 2")
-#         print("For Searching press 3")
-#         print("For Sorting press 4")
-#         print("For Deletion press 5")
-#         print("For Exit press 6")
-#         print("...........................")
-#         OP = int(input())
-#         if OP == 1:
-#             print(OP, ":Traverse Selected")
-#             Traverse()
-#         elif OP == 2:
-#             print(OP, ":Insetion Selected")
-#             Insertion()
-#         elif OP == 3:
-#             print(OP, ":Searching Selected")
-#             Searching()
-#         elif OP == 4:
-#             print(OP, ":Sorting Selected")
-#             Sorting()
-#         elif OP == 5:
-#             print(OP, ":Deletion Selected")
-#             Deletion()
-#         elif OP == 6:
-#             print("Exiting...")
-#             break
-#         else:
-#             print("Invalid Option")
+        print("\nSorted array in", "ascending" if Order == 1 else "descending", "order:")
+        for i in range(N):
+            print("%d" % A[i], end=" ")
 
 
-                    # MORE ALGOS WILL BE HERE
-        # ALTHOUGH IT WILL BE INSIDE SORTING FUNCTION
+# #                               MERGING FUNCTION  
+    def Merging():
+        while True:
+                print("1. Merge Two Arrays")
+                print("2. Exit")
+
+                choice = int(input("Enter your choice (1 or 2): "))
+
+                if choice == 1:
+                    print("Enter elements for the first array:")
+                    A = [
+                        int(x)
+                        for x in input(
+                            "Enter elements of the first array separated by space: "
+                        ).split()
+                    ]
+                    print("Enter elements for the second array:")
+                    B = [
+                        int(x)
+                        for x in input(
+                            "Enter elements of the second array separated by space: "
+                        ).split()
+                    ]
+                    order = input("Enter order (ascending/descending): ")
+
+                    if order.lower() == "ascending":
+                        merged_array = merging(A, B)
+                    elif order.lower() == "descending":
+                        merged_array = merge_descending(A, B)
+                    else:
+                        print("Invalid order. Merging in ascending order by default.")
+                        merged_array = merging(A, B)
+
+                    print("Merged array:", merged_array)
+                elif choice == 2:
+                    print("Exiting the program.")
+                    break
+                else:
+                    print("Invalid choice. Please select 1 or 2.")
+def merging(A, B):
+            C = []
+            i = j = 0
+
+            while i < len(A) and j < len(B):
+                if A[i] < B[j]:
+                    C.append(A[i])
+                    i += 1
+                else:
+                    C.append(B[j])
+                    j += 1
+
+            while i < len(A):
+                C.append(A[i])
+                i += 1
+
+            while j < len(B):
+                C.append(B[j])
+                j += 1
+
+            return C
+
+def merge_descending(A, B):
+            C = []
+            i = len(A) - 1
+            j = len(B) - 1
+
+            while i >= 0 and j >= 0:
+                if A[i] > B[j]:
+                    C.append(A[i])
+                    i -= 1
+                else:
+                    C.append(B[j])
+                    j -= 1
+
+            while i >= 0:
+                C.append(A[i])
+                i -= 1
+
+            while j >= 0:
+                C.append(B[j])
+                j -= 1
+
+            return C
+
+
+  

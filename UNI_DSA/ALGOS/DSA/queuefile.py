@@ -10,7 +10,7 @@ LB = 0  # Lower bound (index of the first element)
 F = LB - 1  # Front (initially empty)
 R = LB - 1  # Rear (initially empty)
 class Queue:
-
+    
     def Q_insertion(item):
         global Q, LB, F, R
 
@@ -56,15 +56,6 @@ class Queue:
 
 
     def CQ_insertion(item):
-        """Inserts an item into the circular queue.
-
-        Args:
-            item: The item to be inserted.
-
-        Returns:
-            The updated queue or a message if the queue is full.
-        """
-
         global F, R, size, CQ 
 
         # Check for full queue (using two conditions)
@@ -89,12 +80,6 @@ class Queue:
 
 
     def CQ_deletion():
-        """Deletes an item from the circular queue.
-
-        Returns:
-            The removed item or a message if the queue is empty.
-        """
-
         global CQ, LB, size, F , R
 
         # Check for empty queue
@@ -116,3 +101,5 @@ class Queue:
 
         print("Circular Queue after deletion:", CQ)
         return item
+    
+    

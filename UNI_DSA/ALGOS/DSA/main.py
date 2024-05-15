@@ -12,8 +12,9 @@ def array():
         print("For Insertion press 2")
         print("For Searching press 3")
         print("For Sorting press 4")
-        print("For Deletion press 5")
-        print("For Exit press 6")
+        print("For Merging press 5")
+        print("For Deletion press 6")
+        print("For Exit press 7")
         print("...........................")
         OP = int(input())
         if OP == 1:
@@ -29,14 +30,17 @@ def array():
             print(OP, ":Sorting Selected")
             Array.Sorting()
         elif OP == 5:
+            print(OP, ":Merging Selected")
+            Array.Merging()
+        elif OP == 6:
             print(OP, ":Deletion Selected")
             Array.Deletion()
-        elif OP == 6:
+        elif OP == 7:
             print("Exiting...")
             break
-            
         else:
             print("Invalid Option")
+
 
 
     
@@ -47,8 +51,7 @@ def stack():
             print("............Select the choices given Below..........")
             print("1:PUSH")
             print("2:POP")
-            print("3:DELETE")
-            print("4:EXIT")
+            print("3:EXIT")
             
             choice = int(input())
             if choice == 1:
@@ -58,10 +61,6 @@ def stack():
             elif choice == 2:
                 Stack.pop()
             elif choice == 3:
-                print("which item you want to delete")
-                item = int(input())
-                Stack.delete(item) 
-            elif choice == 4:
                 print('Exiting..')
                 break
             else:
@@ -74,35 +73,37 @@ def stack():
 def queue():
     try:
         for i in range(total_operations):
-            print("............Select the choices given Below..........")
-            print("1:Q_INSERTION")
-            print("2:Q_DELETION")
-            print("3:CQ_INSERTION")
-            print("4:CQ_DELETION")
-            print("5:EXIT")
-            
+            print(".................which one do you want:")
+            print("1:simple queue")
+            print("2:circular queue")
+            print("3:Exit")
             choice = int(input())
             if choice == 1:
-                print("which item you want to insert in queue")
-                item = int(input())
-                Queue.Q_insertion(item)
+                print("1:queue insert")
+                print("2:queue delete")
+                op = int(input())
+                if op == 1:
+                    print("Enter the item to be  insert in simple queue")
+                    item = int(input())
+                    Queue.Q_insertion(item)
+                if op == 2:
+                    Queue.Q_deletion()
             elif choice == 2:
-                Queue.Q_deletion()
+                print("1:circular insert:")
+                print("2:circular delete:")
+                op = int(input())
+                if op == 1:
+                    print("Enter the item to be insert circular")
+                    item = int(input())
+                    Queue.CQ_insertion(item)
+                if op == 2:
+                    Queue.CQ_deletion()
             elif choice == 3:
-                print("which item you want to insert in circular queue")
-                item = int(input())
-                Queue.CQ_insertion(item) 
-            elif choice == 4:
-                Queue.CQ_deletion() 
-            elif choice == 5:
-                print('Exiting..')
                 break
             else:
-                print("Invalid choice")
-        
+                print("invalid choice")    
     except ValueError as e:
-        print(f"Error: {e}")
-         
+       print(f"Error: {e}")        
         
 class Main:
         print('Starting up the application......')
